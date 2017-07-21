@@ -76,7 +76,7 @@ class User extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING (idperson) ORDER BY b.desperson");
+		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
 
 	}
 
@@ -103,7 +103,7 @@ class User extends Model {
 	{
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) where a.iduser = :iduser", array(
+		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser", array(
 				":iduser"=>$iduser
 			));
   
@@ -114,7 +114,7 @@ class User extends Model {
  	{
  		$sql = new SQL();
  
- 		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone,:inadmin)",array(
+ 		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)",array(
  			 	":iduser"=>$this->getiduser(),
  				":desperson"=>$this->getdesperson(),
  				":deslogin"=>$this->getdeslogin(),
@@ -132,7 +132,7 @@ class User extends Model {
 	public function delete()
 	{
 		$sql = new SQL();
-		
+
 		$sql->query("CALL sp_users_delete(:iduser)",array(
 				":iduser"=>$this->getiduser()
 			));
