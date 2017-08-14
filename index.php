@@ -4,6 +4,7 @@ require_once("vendor/autoload.php");
 require_once("functions.php");
 
 use Hcode\Model\User;
+use Hcode\Model\Category;
 
 $app = new \Slim\Slim();
 
@@ -222,6 +223,22 @@ $app->post("/admin/forgot/reset", function(){
 	]);
 
 	$page->setTpl("forgot-reset-success");
+
+});
+
+$app->get("/admin/categories", function() {
+
+	User::verifyLogin();
+
+	$categories = Category::listAll();
+
+	$page = new Hcode\PageAdmin();
+
+	$page->setTpl("categories", array(
+
+		"categories"=>$categories
+
+	));
 
 });
 
